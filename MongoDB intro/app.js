@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
   User.findById('68b43a8b9825a853222370e0')
     .then(user => {
+      console.log(user);
       req.user = new User(user.name, user.email, user.cart, user._id);
       next();
     })
@@ -34,4 +35,4 @@ app.use(errorController.get404);
 
 mongoConnect(() => {
   app.listen(3000);
-})
+});
